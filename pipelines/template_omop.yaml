@@ -29,7 +29,7 @@ pool:
   vmImage: 'ubuntu-latest'
  
 jobs:
-  job: omop cdm6 generator
+  - job: omop_generator
     timeoutInMinutes: 0
     steps:
     - checkout: self
