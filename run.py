@@ -10,15 +10,6 @@ basedir = sys.argv[1]
 country  = sys.argv[2]
 path = basedir + "/s/synthea/build/resources/main/modules/"
 files = [f for f in listdir(path) if isfile(join(path, f))]
-# add some extra running types
-modules=[]
-#modules.append('*')
-#modules.append('cancer*')
-for file in files:
-    modules.append(os.path.splitext(file)[0])
-# remove all USA veteran modules
-modules = [x for x in modules if not 'veteran' in x]
-print(modules)
 
 # open file for writing markup file
 os.mkdir(basedir + '/s/synthea/output')
@@ -42,10 +33,12 @@ for region in regions:
             for f in filesToRemove:
                 os.remove(os.path.join('output/fhir', f))
     # run synthea
-    os.system("./run_synthea -p 100 Uusimaa")
+    os.system("./run_synthea -p 200000 Uusimaa")
     # compress synthea output
     os.chdir(basedir + '/s/synthea/output/csv')
+    os.system("ls -la")
     os.system("gzip *")
+    os.system("ls -la")
     # run synthea->omop 6
     os.chdir(basedir + '/s/ETL-Synthea-Python/python_etl')
     #export CDM_VERSION=531
