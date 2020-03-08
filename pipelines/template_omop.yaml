@@ -68,12 +68,12 @@ steps:
     python ./run.py ${AGENT_BUILDDIRECTORY} $COUNTRY
   displayName: 'Run Synthea, Synthea->OMOP 6 for country'
 - script: |
-    mkdir -p ${AGENT_BUILDDIRECTORY}/s/SyntheticFinland/fi
     cd ${AGENT_BUILDDIRECTORY}/s/SyntheticFinland/
     git config --global user.name "scivm"
     git push origin --delete omop
     git branch omop
     git checkout omop
+    mkdir -p ${AGENT_BUILDDIRECTORY}/s/SyntheticFinland/omop
     rm ${AGENT_BUILDDIRECTORY}/s/SyntheticFinland/omop/*
     cd ${AGENT_BUILDDIRECTORY}/s/ETL-Synthea-Python
     cp *.zip ${AGENT_BUILDDIRECTORY}/s/SyntheticFinland/omop
