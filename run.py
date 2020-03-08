@@ -42,7 +42,7 @@ for region in regions:
             for f in filesToRemove:
                 os.remove(os.path.join('output/fhir', f))
     # run synthea
-    os.system("./run_synthea -p 100 Uusimaa")
+    os.system("./run_synthea -p 50000 Uusimaa")
     # run synthea->omop 6
     os.chdir(basedir + '/s/ETL-Synthea-Python/python_etl')
     #export CDM_VERSION=531
