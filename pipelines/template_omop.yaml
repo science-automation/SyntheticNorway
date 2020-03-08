@@ -80,5 +80,5 @@ steps:
     cd ${AGENT_BUILDDIRECTORY}/s/SyntheticNorway
     git add .
     git commit -m "generated from automation [skip ci]"
-    git push origin HEAD:$COUNTRY
+    git push origin HEAD:omop
   displayName: "Check files into git storage"
