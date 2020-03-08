@@ -43,6 +43,9 @@ for region in regions:
                 os.remove(os.path.join('output/fhir', f))
     # run synthea
     os.system("./run_synthea -p 50000 Uusimaa")
+    # compress synthea output
+    os.chdir(basedir + '/s/synthea/output/csv')
+    os.system("gzip *")
     # run synthea->omop 6
     os.chdir(basedir + '/s/ETL-Synthea-Python/python_etl')
     #export CDM_VERSION=531
