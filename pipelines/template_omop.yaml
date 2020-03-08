@@ -13,10 +13,10 @@ resources:
       type: github
       endpoint: science-automation
       name: synthetichealth/synthea-international
-    - repository: SyntheticFinland
+    - repository: SyntheticNorway
       type: github
       endpoint: science-automation
-      name: science-automation/SyntheticFinland
+      name: science-automation/SyntheticNorway
     - repository: ETL-Synthea-Python
       type: github
       endpoint: science-automation
@@ -64,20 +64,20 @@ steps:
     echo "COUNTER_FILE=.counter" >> .env
   displayName: 'Prepare Synthea to OMOP for country'
 - script: |
-    cd ${AGENT_BUILDDIRECTORY}/s/SyntheticFinland
+    cd ${AGENT_BUILDDIRECTORY}/s/SyntheticNorway
     python ./run.py ${AGENT_BUILDDIRECTORY} $COUNTRY
   displayName: 'Run Synthea, Synthea->OMOP 6 for country'
 - script: |
-    cd ${AGENT_BUILDDIRECTORY}/s/SyntheticFinland/
+    cd ${AGENT_BUILDDIRECTORY}/s/SyntheticNorway/
     git config --global user.name "scivm"
     git push origin --delete omop
     git branch omop
     git checkout omop
-    mkdir -p ${AGENT_BUILDDIRECTORY}/s/SyntheticFinland/omop
-    rm ${AGENT_BUILDDIRECTORY}/s/SyntheticFinland/omop/*
+    mkdir -p ${AGENT_BUILDDIRECTORY}/s/SyntheticNorway/omop
+    rm ${AGENT_BUILDDIRECTORY}/s/SyntheticNorway/omop/*
     cd ${AGENT_BUILDDIRECTORY}/s/ETL-Synthea-Python
-    cp *.zip ${AGENT_BUILDDIRECTORY}/s/SyntheticFinland/omop
-    cd ${AGENT_BUILDDIRECTORY}/s/SyntheticFinland
+    cp *.zip ${AGENT_BUILDDIRECTORY}/s/SyntheticNorway/omop
+    cd ${AGENT_BUILDDIRECTORY}/s/SyntheticNorway
     git add .
     git commit -m "generated from automation [skip ci]"
     git push origin HEAD:$COUNTRY
