@@ -77,7 +77,7 @@ jobs:
         git branch omop
         git checkout omop
         mkdir -p ${AGENT_BUILDDIRECTORY}/s/SyntheticNorway/omop
-        rm ${AGENT_BUILDDIRECTORY}/s/SyntheticNorway/omop/*
+        rm -f ${AGENT_BUILDDIRECTORY}/s/SyntheticNorway/omop/*
         cd ${AGENT_BUILDDIRECTORY}/s/ETL-Synthea-Python
         cp *.zip ${AGENT_BUILDDIRECTORY}/s/SyntheticNorway/omop
         cd ${AGENT_BUILDDIRECTORY}/s/SyntheticNorway
