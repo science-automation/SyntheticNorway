@@ -48,11 +48,6 @@ for region in regions:
     #export CDM_VERSION=531
     os.system("python synthea_omop.py")
     os.chdir(basedir + '/s/ETL-Synthea-Python/output')
-    os.system("zip ../" + module + "_omop_6.zip *.csv")
-    # zip up synthea output
-    os.chdir(basedir + '/s/synthea/output/csv')
-    os.system("zip ../" + module + "_synthea_csv.zip *.csv")
-    os.chdir(basedir + '/s/synthea/output/fhir')
-    os.system("zip ../" + module + "_synthea_fhir.zip *.csv")
+    os.system("zip ../" + "norway" + "_omop_6.zip *.csv")
     #file.write(module + ": " + synthea_fhir + synthea_csv + omop_cdm531 + omop_cdm6 + "\n\n")
 file.close()
