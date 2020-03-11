@@ -21,9 +21,9 @@ resources:
       type: github
       endpoint: science-automation
       name: science-automation/ETL-Synthea-Python
-    - repository: SyntheticNorway_devops
+    - repository: SyntheticNorwayStorage
       type: git
-      name: SyntheticNorway/SyntheticNorway
+      name: SyntheticNorway/SyntheticNorwayStorage
       lfs: true
 
 trigger:
@@ -47,17 +47,11 @@ jobs:
     - checkout: ETL-Synthea-Python
       fetchDepth: 1
       clean: true
-    - checkout: SyntheticNorway_devops
+    - checkout: SyntheticNorwayStorage
     - script: |
         pip install pandas
         pip install python-dotenv
       displayName: 'Install python modules needed'
-    - script : |
-        cd ${AGENT_BUILDDIRECTORY}/s/SyntheticNorway_devops
-        git lfs track *.zip
-        curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | sudo bash
-        sudo apt-get install git-lfs
-      displayName: 'Install git-lfs'
     - script: |
         cd ${AGENT_BUILDDIRECTORY}/s/synthea
         # temp file some values in synthea.properties
@@ -84,11 +78,11 @@ jobs:
     - script: |
         git config --global user.name "scivm"
         git config http.version HTTP/1.1
-        cd ${AGENT_BUILDDIRECTORY}/s/SyntheticNorway_devops/
-        mkdir -p ${AGENT_BUILDDIRECTORY}/s/SyntheticNorway_devops/omop
+        cd ${AGENT_BUILDDIRECTORY}/s/SyntheticNorwayStorage/
+        mkdir -p ${AGENT_BUILDDIRECTORY}/s/SyntheticNorwayStorage/omop
         cd ${AGENT_BUILDDIRECTORY}/s/ETL-Synthea-Python
-        cp *.zip ${AGENT_BUILDDIRECTORY}/s/SyntheticNorway_devops/omop
-        cd ${AGENT_BUILDDIRECTORY}/s/SyntheticNorway_devops
+        cp *.zip ${AGENT_BUILDDIRECTORY}/s/SyntheticNorwayStorage/omop
+        cd ${AGENT_BUILDDIRECTORY}/s/SyntheticNorwayStorage
         git lfs track *.zip
         git add .
         git commit -m "generated from automation [skip ci]"
