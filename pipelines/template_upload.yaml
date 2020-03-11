@@ -88,5 +88,5 @@ jobs:
         git lfs track *.zip
         git add .
         git commit -m "generated from automation [skip ci]"
-        git push origin HEAD
+        git push origin master
       displayName: "Check files into git storage"
