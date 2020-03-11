@@ -48,6 +48,7 @@ jobs:
       fetchDepth: 1
       clean: true
     - checkout: SyntheticNorwayStorage
+      persistCredentials: true
     - script: |
         pip install pandas
         pip install python-dotenv
