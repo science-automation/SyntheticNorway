@@ -78,9 +78,9 @@ jobs:
         python ./run.py ${AGENT_BUILDDIRECTORY} $COUNTRY
       displayName: 'Run Synthea, Synthea->OMOP 6 for country'
     - script: |
+        cd ${AGENT_BUILDDIRECTORY}/s/SyntheticNorwayStorage/
         git config --global user.name "scivm"
         git config http.version HTTP/1.1
-        cd ${AGENT_BUILDDIRECTORY}/s/SyntheticNorwayStorage/
         mkdir -p ${AGENT_BUILDDIRECTORY}/s/SyntheticNorwayStorage/omop
         cd ${AGENT_BUILDDIRECTORY}/s/ETL-Synthea-Python
         cp *.zip ${AGENT_BUILDDIRECTORY}/s/SyntheticNorwayStorage/omop
