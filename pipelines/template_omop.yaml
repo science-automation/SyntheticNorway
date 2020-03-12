@@ -69,7 +69,7 @@ jobs:
         echo "BASE_SYNTHEA_INPUT_DIRECTORY=${AGENT_BUILDDIRECTORY}/s/synthea/output/csv" > .env
         echo "BASE_OMOP_INPUT_DIRECTORY=${AGENT_BUILDDIRECTORY}/s/ETL-Synthea-Python/vocab/" >> .env
         echo "BASE_OUTPUT_DIRECTORY=${AGENT_BUILDDIRECTORY}/s/ETL-Synthea-Python/output" >> .env
-        echo "CDM_VERSION=5" >> .env
+        echo "CDM_VERSION=6" >> .env
         echo "INPUT_CHUNK_SIZE=100000" >> .env
         echo "COUNTER_FILE=.counter" >> .env
       displayName: 'Prepare Synthea to OMOP for country'
