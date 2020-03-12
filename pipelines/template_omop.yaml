@@ -21,6 +21,10 @@ resources:
       type: github
       endpoint: science-automation
       name: science-automation/ETL-Synthea-Python
+    - repository: SyntheticNorwayStorage
+      type: git
+      name: SyntheticNorway/SyntheticNorwayStorage
+      lfs: true
 
 trigger:
 - master
@@ -43,6 +47,8 @@ jobs:
     - checkout: ETL-Synthea-Python
       fetchDepth: 1
       clean: true
+    - checkout: SyntheticNorwayStorage
+      persistCredentials: true
     - script: |
         pip install pandas
         pip install python-dotenv
@@ -72,17 +78,16 @@ jobs:
         python ./run.py ${AGENT_BUILDDIRECTORY} $COUNTRY
       displayName: 'Run Synthea, Synthea->OMOP 6 for country'
     - script: |
-        cd ${AGENT_BUILDDIRECTORY}/s/SyntheticNorway/
+        cd ${AGENT_BUILDDIRECTORY}/s/SyntheticNorwayStorage/
         git config --global user.name "scivm"
-        git push origin --delete omop
-        git branch omop
-        git checkout omop
-        mkdir -p ${AGENT_BUILDDIRECTORY}/s/SyntheticNorway/omop
-        rm -f ${AGENT_BUILDDIRECTORY}/s/SyntheticNorway/omop/*
+        git config http.version HTTP/1.1
+        mkdir -p ${AGENT_BUILDDIRECTORY}/s/SyntheticNorwayStorage/omop
         cd ${AGENT_BUILDDIRECTORY}/s/ETL-Synthea-Python
-        cp *.zip ${AGENT_BUILDDIRECTORY}/s/SyntheticNorway/omop
-        cd ${AGENT_BUILDDIRECTORY}/s/SyntheticNorway
+        cp *.zip ${AGENT_BUILDDIRECTORY}/s/SyntheticNorwayStorage/omop
+        cd ${AGENT_BUILDDIRECTORY}/s/SyntheticNorwayStorage
+        git lfs track *.zip
         git add .
         git commit -m "generated from automation [skip ci]"
-        git push origin HEAD:omop
+        git show-ref
+        git push origin HEAD:master
       displayName: "Check files into git storage"
